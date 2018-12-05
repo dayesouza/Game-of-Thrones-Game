@@ -3,7 +3,7 @@
 }
 
 .body-jogo{
-	background-image: url('../images/mapa.gif');
+	background-image: url('../images/map.gif');
 	background-position: center;
 }
 
@@ -74,7 +74,7 @@
 	overflow: auto;
 }
 
-.casa span{
+.house span{
 	margin-top:-20px;
 	margin-left:10px;
 	display: block;

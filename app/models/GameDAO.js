@@ -1,11 +1,11 @@
 var ObjectID = require('mongodb').ObjectID;
-function JogoDAO(connection) {
+function GameDAO(connection) {
   this._connection = connection();
   this._actions_list = [];
   this._jogo;
 }
 
-JogoDAO.prototype.gerarParametros = function(usuario) {
+GameDAO.prototype.gerarParametros = function(usuario) {
   //TODO: Fazer gerar dependendo da casa
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
@@ -13,12 +13,12 @@ JogoDAO.prototype.gerarParametros = function(usuario) {
       //Pega a coleção
       collection.insert({
         usuario: usuario,
-        moedas: 15,
-        suditos: 10,
-        temor: Math.floor(Math.random() * 1000),
-        sabedoria: Math.floor(Math.random() * 1000),
-        comercio: Math.floor(Math.random() * 1000),
-        magia: Math.floor(Math.random() * 1000)
+        coins: 15,
+        subjects: 10,
+        feat: Math.floor(Math.random() * 1000),
+        wisdom: Math.floor(Math.random() * 1000),
+        trade: Math.floor(Math.random() * 1000),
+        magic: Math.floor(Math.random() * 1000)
       });
 
       mongoclient.close();
@@ -26,7 +26,7 @@ JogoDAO.prototype.gerarParametros = function(usuario) {
   });
 };
 
-JogoDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
+GameDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
     mongoclient.collection("jogos", function(err, collection) {
@@ -36,7 +36,7 @@ JogoDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
 
         this._jogo = result[0];
         console.log(result[0]);
-        res.render("jogo", {img_casa: casa, jogo: result[0], msg: msg})
+        res.render("jogo", {img_house: casa, game: result[0], msg: msg})
 
         mongoclient.close();
       });
@@ -44,7 +44,7 @@ JogoDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
   });
 };
 
-JogoDAO.prototype.acao = function(acao,res) {
+GameDAO.prototype.acao = function(acao,res) {
 
   return this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
@@ -90,7 +90,7 @@ JogoDAO.prototype.acao = function(acao,res) {
   }
 };
 
-JogoDAO.prototype.getAcoesDisponiveis = function(usuario, res) {
+GameDAO.prototype.getAcoesDisponiveis = function(usuario, res) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
     mongoclient.collection("actions_list", function(err, collection) {
@@ -106,7 +106,7 @@ JogoDAO.prototype.getAcoesDisponiveis = function(usuario, res) {
 
 };
 
-JogoDAO.prototype.getAcoes = function(usuario, res) {
+GameDAO.prototype.getAcoes = function(usuario, res) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
     mongoclient.collection("acoes", function(err, collection) {
@@ -129,7 +129,7 @@ JogoDAO.prototype.getAcoes = function(usuario, res) {
 
 };
 
-JogoDAO.prototype.revogar_acao = function(id_acao, res) {
+GameDAO.prototype.revogar_acao = function(id_acao, res) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
     mongoclient.collection("acoes", function(err, collection) {
@@ -146,5 +146,5 @@ JogoDAO.prototype.revogar_acao = function(id_acao, res) {
 };
 
 module.exports = function() {
-  return JogoDAO;
+  return GameDAO;
 };

@@ -7,8 +7,8 @@ module.exports.autenticar = function (app, req, res) {
 
   var dados_form = req.body;
 
-  req.assert("usuario", "Digite o usuário").notEmpty();
-  req.assert("senha", "Digite a senha").notEmpty();
+  req.assert("usuario", "Type the user").notEmpty();
+  req.assert("senha", "Type the password");
 
   var erros = req.validationErrors();
 
@@ -18,9 +18,7 @@ module.exports.autenticar = function (app, req, res) {
   }
 
   var connection = app.config.dbConnection;
-  var UsuariosDAO = new app.app.models.UsuariosDAO(connection);
+  var UsersDAO = new app.app.models.UsersDAO(connection);
 
-  UsuariosDAO.autenticar(dados_form, req, res);
-
-  //res.send('OK');
+  UsersDAO.autenticar(dados_form, req, res);
 }

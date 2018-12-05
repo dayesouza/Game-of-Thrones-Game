@@ -14,9 +14,9 @@ module.exports.jogo = function(app, req,res){
   var usuario = req.session.usuario;
   var casa = req.session.casa;
   var connection = app.config.dbConnection;
-  var jogoDAO = new app.app.models.JogoDAO(connection);
+  var GameDAO = new app.app.models.GameDAO(connection);
 
-  jogoDAO.iniciaJogo(res, usuario, casa, msg);
+  GameDAO.iniciaJogo(res, usuario, casa, msg);
 
 }
 
@@ -34,9 +34,9 @@ module.exports.suditos = function(app, req,res){
 
   //Traz acoes disponiveis
   var connection = app.config.dbConnection;
-  var JogoDAO = new app.app.models.JogoDAO(connection);
+  var GameDAO = new app.app.models.GameDAO(connection);
 
-  JogoDAO.getAcoesDisponiveis(req.session.usuario, res);
+  GameDAO.getAcoesDisponiveis(req.session.usuario, res);
   return;
 
   //res.render("aldeoes", {validacao: {}});
@@ -51,9 +51,9 @@ module.exports.pergaminhos = function(app, req,res){
 
   /* Recuperar acoes inseridas no banco de dados */
   var connection = app.config.dbConnection;
-  var JogoDAO = new app.app.models.JogoDAO(connection);
+  var GameDAO = new app.app.models.GameDAO(connection);
 
-  JogoDAO.getAcoes(req.session.usuario, res);
+  GameDAO.getAcoes(req.session.usuario, res);
   return;
   //res.render("pergaminhos", {validacao: {}});
 }
@@ -78,18 +78,18 @@ module.exports.ordenar_acao_sudito = function(app, req,res){
   }
 
   var connection = app.config.dbConnection;
-  var JogoDAO = new app.app.models.JogoDAO(connection);
+  var GameDAO = new app.app.models.GameDAO(connection);
 
   dadosForm.usuario = req.session.usuario;
-  JogoDAO.acao(dadosForm, res);
+  GameDAO.acao(dadosForm, res);
 }
 
 module.exports.revogar_acao = function(app, req, res){
   var url_query = req.query;
   
   var connection = app.config.dbConnection;
-  var JogoDAO = new app.app.models.JogoDAO(connection);
+  var GameDAO = new app.app.models.GameDAO(connection);
 
-  JogoDAO.revogar_acao(url_query.id, res);
+  GameDAO.revogar_acao(url_query.id, res);
 
 }

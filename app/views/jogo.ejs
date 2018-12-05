@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="pt-br">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 
@@ -50,7 +50,7 @@
 					var tempo = ((parseInt($(this).html()) -1));
 					//salvar na base como concluido
 					if(tempo < 0){
-						$(this).next('.seg').html("Concluído");
+						$(this).next('.seg').html("Done");
 						$(this).next('.seg').next('a.revogar_ordem').remove();
 						$(this).removeClass('tempo_restante');
 					}
@@ -107,30 +107,30 @@
 
 	    	
 			<div class="row">
-	    		<div class="col-sm-3 casa">
-					<img src="images/casa_<%=img_casa%>.jpg" />
+	    		<div class="col-sm-3 house">
+					<img src="images/house_<%=img_house%>.jpg" />
 				</div>
 
 	    		<div class="col-sm-9">
 					<div class="row barra-superior">
 						<div class="col-sm-2"> 
 							<img src="images/habilidades/temor.jpg" title="Temor" alt="Temor" />
-							<span><%= jogo.temor %></span>
+							<span><%= game.fear %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
 							<img src="images/habilidades/sabedoria.jpg" title="Sabedoria" alt="Sabedoria"/>
-							<span><%= jogo.sabedoria %></span>
+							<span><%= game.wisdom %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
 							<img src="images/habilidades/comercio.jpg" title="Comércio" alt="Comércio"/>
-							<span><%= jogo.comercio %></span>
+							<span><%= game.trade %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
 							<img src="images/habilidades/magia.jpg" title="Magia" alt="Magia"/>
-							<span><%= jogo.magia %></span>
+							<span><%= game.magic %></span>
 						</div>
 					</div>
 				</div>
@@ -163,7 +163,7 @@
 					
 					<div class="col-sm-2">
 						<img src="images/outros/moeda.jpg" title="Moedas" alt="Moedas"/>
-						<span><%= jogo.moedas %></span>
+						<span><%= game.coins %></span>
 					</div>
 					
 				</div>
