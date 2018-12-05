@@ -26,7 +26,7 @@ GameDAO.prototype.gerarParametros = function(usuario) {
   });
 };
 
-GameDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
+GameDAO.prototype.iniciaJogo = function(res, usuario,house, msg) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
     mongoclient.collection("jogos", function(err, collection) {
@@ -36,7 +36,7 @@ GameDAO.prototype.iniciaJogo = function(res, usuario,casa, msg) {
 
         this._jogo = result[0];
         console.log(result[0]);
-        res.render("jogo", {img_house: casa, game: result[0], msg: msg})
+        res.render("jogo", {img_house: house, game: result[0], msg: msg})
 
         mongoclient.close();
       });
@@ -121,7 +121,7 @@ GameDAO.prototype.getAcoes = function(usuario, res) {
       collection.find({ usuario: usuario, termina_em: {$lt:new Date().getTime()}}).sort({termina_em:1}).limit(2)
       .toArray(function(err, result) {
         
-        res.render("pergaminhos", {acoes: _acoes, acoes_anteriores: result});
+        res.render("parchments", {acoes: _acoes, acoes_anteriores: result});
         mongoclient.close();
       });
     });

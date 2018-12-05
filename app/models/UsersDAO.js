@@ -14,14 +14,16 @@ UsersDAO.prototype.insertUser = function (user) {
 
 }
 
-UsersDAO.prototype.autenticar = function (usuario, req, res) {//Metodo da classe
-  this._database.open(function(err, mongoclient){//abri conexao com o servidor e db
-    mongoclient.collection("users", function(err, collection){//Pega a coleção
-        // collection.find({usuario:  usuario.usuario, senha:  usuario.senha}).toArray(function(err, result){
-        collection.find(usuario).toArray(function(err, result){
+UsersDAO.prototype.autenticar = function (user, req, res) {
+  this._database.open(function(err, mongoclient){
+
+    mongoclient.collection("users", function(err, collection){
+        collection.find(user).toArray(function(err, result){
+          console.log(user);
+          console.log(result);
           if(result[0] != undefined){
             req.session.autorizado = true;
-            req.session.usuario = result[0].usuario;
+            req.session.usuario = result[0].user;
             req.session.house = result[0].house;
           }
 

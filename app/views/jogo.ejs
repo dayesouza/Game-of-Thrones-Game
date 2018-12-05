@@ -8,35 +8,35 @@
 		<!-- JQuery -->
 		<script src="js/jquery-2.2.1.js"></script>
 
-		<!-- bootstrap - link cdn -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- bootstrap theme cosmo -->
+		<link rel="stylesheet" href="css/bootstrap_cosmo.css">
 	
-		<!-- incluindo css -->
+		<!-- personalized css -->
 		<link href="css/style.css" rel="stylesheet">
 
 		<script>
 		$(document).ready(function(){
-			$('#btn_suditos').click(function(){
+			$('#btn_subjects').click(function(){
 				$(".msg").hide();
 				$.ajax({
-					url: '/suditos',
+					url: '/subjects',
 					method: 'GET',
 					success: function(data){
-						$('#acoes').html(data);
+						$('#actions').html(data);
 					}
 				})
 			})
 
-			$('#btn_pergaminho').click(function(){
+			$('#btn_parchment').click(function(){
 				$(".msgs").hide();
 				$.ajax({
-					url: '/pergaminhos',
+					url: '/parchments',
 					method: 'GET',
 					success: function(data){
-						$('#acoes').html(data);
+						$('#actions').html(data);
 
 						clearTimeout(timerId);
-						cronometro();
+						cronometer();
 
 					}
 				})
@@ -45,21 +45,20 @@
 		})
 
 		var timerId = null;
-		function cronometro(){
+		function cronometer(){
 				$('.tempo_restante').each(function(){
-					var tempo = ((parseInt($(this).html()) -1));
-					//salvar na base como concluido
-					if(tempo < 0){
+					var time = ((parseInt($(this).html()) -1));
+					if(time < 0){
 						$(this).next('.seg').html("Done");
 						$(this).next('.seg').next('a.revogar_ordem').remove();
 						$(this).removeClass('tempo_restante');
 					}
 					else{
-						$(this).html(parseInt(tempo));
+						$(this).html(parseInt(time));
 					}
 				});
 
-				timerId = setTimeout(cronometro,1000);
+				timerId = setTimeout(cronometer,1000);
 		}
 	</script>
 
@@ -70,7 +69,7 @@
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="form-group sair">
-					<a href='/logout' class="btn btn-info pull-right">Sair</a>
+					<a href='/logout' class="btn btn-info pull-right">Logout</a>
 				</div>
 			</div>
 		</nav>
@@ -79,32 +78,24 @@
 
 				<% if(msg == 'E')	{	%>
 					<div class="alert alert-danger msgs">
-						<strong> Operação inválida!</strong>
+						<strong> Error!</strong>
 					</div>
 
 					<% }%>
 
 				<% if(msg == 'M')	{	%>
 					<div class="alert alert-danger msgs">
-						<strong> Operação inválida! Você não possui as moedas necessárias.</strong>
+						<strong> Warning! You do not have enough coins</strong>
 					</div>
 
 					<% }%>
 
-				<% if(msg == 'S')	{	%>
+				<% if(msg == 'S' || msg == 'D')	{	%>
 					<div class="alert alert-success msgs">
-						<strong> Operação salva com sucesso!</strong>
+						<strong> Success!</strong>
 					</div>
 
 					<% }%>
-
-				<% if(msg == 'D')	{	%>
-					<div class="alert alert-success msgs">
-						<strong> Ordem revogada com sucesso!</strong>
-					</div>
-
-					<% }%>
-
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 house">
@@ -114,22 +105,22 @@
 	    		<div class="col-sm-9">
 					<div class="row barra-superior">
 						<div class="col-sm-2"> 
-							<img src="images/habilidades/temor.jpg" title="Temor" alt="Temor" />
+							<img src="images/abilities/fear.jpg" title="Fear" alt="Fear" />
 							<span><%= game.fear %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
-							<img src="images/habilidades/sabedoria.jpg" title="Sabedoria" alt="Sabedoria"/>
+							<img src="images/abilities/wisdom.jpg" title="Wisdom" alt="Wisdom"/>
 							<span><%= game.wisdom %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
-							<img src="images/habilidades/comercio.jpg" title="Comércio" alt="Comércio"/>
+							<img src="images/abilities/trade.jpg" title="Trade" alt="Trade"/>
 							<span><%= game.trade %></span>
 						</div>
 						
 						<div class="col-sm-2"> 
-							<img src="images/habilidades/magia.jpg" title="Magia" alt="Magia"/>
+							<img src="images/abilities/magic.jpg" title="Magic" alt="Magic"/>
 							<span><%= game.magic %></span>
 						</div>
 					</div>
@@ -139,8 +130,8 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
-					<div class="acoes" id='acoes'>
-						Senhor, o que deseja fazer hoje?
+					<div class="actions" id='actions'>
+						Sir, what do you want to do today?
 					</div>					
 				</div>
 			</div>
@@ -152,17 +143,17 @@
 			
 				<div class="row">
 					<div class="col-sm-1">
-						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" id='btn_suditos'/>
+						<img src="images/others/subject.jpg" title="Subjects" alt="Subjects" id='btn_subjects'/>
 					</div>
 					
 					<div class="col-sm-1">
-						<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos" id='btn_pergaminho'/>
+						<img src="images/others/parchment.jpg" title="Parchment" alt="Parchment" id='btn_parchment'/>
 					</div>
 					
 					<div class="col-sm-8"></div>
 					
 					<div class="col-sm-2">
-						<img src="images/outros/moeda.jpg" title="Moedas" alt="Moedas"/>
+						<img src="images/others/coin.jpg" title="Coins" alt="Coins"/>
 						<span><%= game.coins %></span>
 					</div>
 					

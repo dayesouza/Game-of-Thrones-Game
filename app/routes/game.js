@@ -5,11 +5,11 @@ module.exports = function(application){
 	application.get('/logout', function(req, res){
 		application.app.controllers.gameC.logout(application, req,res);
 	});
-	application.get('/suditos', function(req, res){
-		application.app.controllers.gameC.suditos(application, req,res);
+	application.get('/subjects', function(req, res){
+		application.app.controllers.gameC.subjects(application, req,res);
 	});
-	application.get('/pergaminhos', function(req, res){
-		application.app.controllers.gameC.pergaminhos(application, req,res);
+	application.get('/parchments', function(req, res){
+		application.app.controllers.gameC.parchments(application, req,res);
 	});
 	application.post('/ordenar_acao_sudito', function(req, res){
 		application.app.controllers.gameC.ordenar_acao_sudito(application, req,res);

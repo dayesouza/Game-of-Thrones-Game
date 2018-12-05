@@ -8,7 +8,7 @@ module.exports.cadastrar = function(app, req,res){
   var dados_form = req.body;
 
   req.assert('name',"Name can't be empty").notEmpty();
-  req.assert('user',"User can't be empty").notEmpty();
+  req.assert('username',"User can't be empty").notEmpty();
   req.assert('password',"Password can't be empty").notEmpty();
   req.assert('house',"House can't be empty").notEmpty();
 

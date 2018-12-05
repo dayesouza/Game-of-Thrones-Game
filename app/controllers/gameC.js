@@ -12,11 +12,11 @@ module.exports.jogo = function(app, req,res){
 
 
   var usuario = req.session.usuario;
-  var casa = req.session.casa;
+  var house = req.session.house;
   var connection = app.config.dbConnection;
   var GameDAO = new app.app.models.GameDAO(connection);
 
-  GameDAO.iniciaJogo(res, usuario, casa, msg);
+  GameDAO.iniciaJogo(res, usuario, house, msg);
 
 }
 
@@ -26,9 +26,9 @@ module.exports.logout = function(app, req,res){
   });
 }
 
-module.exports.suditos = function(app, req,res){
+module.exports.subjects = function(app, req,res){
   if(!req.session.autorizado){
-    res.send('Usuário precisa fazer login');
+    res.send('User need to log-in');
     return;
   }
 
@@ -42,10 +42,10 @@ module.exports.suditos = function(app, req,res){
   //res.render("aldeoes", {validacao: {}});
 }
 
-module.exports.pergaminhos = function(app, req,res){
+module.exports.parchments = function(app, req,res){
 
   if(!req.session.autorizado){
-    res.send('Usuário precisa fazer login');
+    res.send('User need to log-in');
     return;
   }
 
@@ -55,7 +55,7 @@ module.exports.pergaminhos = function(app, req,res){
 
   GameDAO.getAcoes(req.session.usuario, res);
   return;
-  //res.render("pergaminhos", {validacao: {}});
+  //res.render("parchments", {validacao: {}});
 }
 
 module.exports.ordenar_acao_sudito = function(app, req,res){
