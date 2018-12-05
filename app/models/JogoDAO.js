@@ -1,7 +1,7 @@
 var ObjectID = require('mongodb').ObjectID;
 function JogoDAO(connection) {
   this._connection = connection();
-  this._lista_acoes = [];
+  this._actions_list = [];
   this._jogo;
 }
 
@@ -80,11 +80,11 @@ JogoDAO.prototype.acao = function(acao,res) {
   });
 
   function retornaAcao(codigo){
-    for(var i = 0; i < this._lista_acoes.length; i++){
+    for(var i = 0; i < this._actions_list.length; i++){
       console.log("codigo", codigo);
 
-      if(this._lista_acoes[i].codigo == codigo){
-        return this._lista_acoes[i];
+      if(this._actions_list[i].codigo == codigo){
+        return this._actions_list[i];
       }
     }
   }
@@ -93,12 +93,12 @@ JogoDAO.prototype.acao = function(acao,res) {
 JogoDAO.prototype.getAcoesDisponiveis = function(usuario, res) {
   this._connection.open(function(err, mongoclient) {
     //abri conexao com o servidor e db
-    mongoclient.collection("lista_acoes", function(err, collection) {
+    mongoclient.collection("actions_list", function(err, collection) {
       //Pega a coleção
       // collection.find({usuario:  usuario.usuario, senha:  usuario.senha}).toArray(function(err, result){
       collection.find().toArray(function(err, result) {
-        this._lista_acoes = result;
-        res.render("aldeoes", {lista_acoes: result});     
+        this._actions_list = result;
+        res.render("aldeoes", {actions_list: result});     
         mongoclient.close();
       });
     });

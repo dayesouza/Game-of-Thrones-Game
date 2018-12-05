@@ -1,6 +1,6 @@
 //Create actions:
 use got;
-db.lista_acoes.insert({nome: "Enforcar Aldeão", moedas: 3, minutos: 5, codigo: 1});
-db.lista_acoes.insert({nome: "Coletar recursos", moedas: 2, minutos: 3, codigo: 2});
-db.lista_acoes.insert({nome: "Ensinar história", moedas: 1, minutos: 10, codigo: 3});
-db.lista_acoes.insert({nome: "Ensinar Magia", moedas: 2, minutos: 15, codigo: 4});
+db.actions_list.insert({name: "Hang village", coins: 3, minutes: 5, code: 1});
+db.actions_list.insert({name: "Colect resources", coins: 2, minutes: 3, code: 2});
+db.actions_list.insert({name: "Teach history", coins: 1, minutes: 10, code: 3});
+db.actions_list.insert({name: "Teach magic", coins: 2, minutes: 15, code: 4});

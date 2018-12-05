@@ -7,18 +7,14 @@
 			<div class="col-xs-5">
 				<div class="form-group">
 					<select class="form-control" name="cod_acao">
-						<option value="">-- Escolha a ação</option>
-						<% for(var i = 0; i < lista_acoes.length; i++){ %>
-							<option value="<%=lista_acoes[i].codigo%>">
-								<%= lista_acoes[i].nome %>
-								(<%=lista_acoes[i].moedas %>G e 
-								<%= lista_acoes[i].minutos%> minutos)
+						<option value="">-- Pick the action</option>
+						<% for(var i = 0; i < actions_list.length; i++){ %>
+							<option value="<%=actions_list[i].code%>">
+								<%= actions_list[i].name %>
+								(<%=actions_list[i].coins %>G e 
+								<%= actions_list[i].minutes%> minutes)
 							</option>
 						<% } %>
-								<!-- Coletar recursos (2G e 1H)</option> -->
-						<!-- <option value="2">Enforcar aldeão (3G e 2H)</option>
-						<option value="3">Ensinar história (1G e 5H)</option>
-						<option value="4">Ensinar magia (1G e 5H)</option> -->
 					</select>										
 				</div>
 			</div>
@@ -31,7 +27,7 @@
 			
 			<div class="col-xs-4">
 				<div class="form-group row">
-					<button type="submit" class="btn btn-primary">Ordenar</button>
+					<button type="submit" class="btn btn-primary">Command</button>
 				</div>
 			</div>
 			
@@ -40,7 +36,7 @@
 		<hr />
 		<div class="row">
 			<div class="col-xs-12">
-				<span>Senhor, você possui 8 aldeões desocupados e 2 aldeões em atividade.</span>
+				<span>Sir, you have 8 free villagers and 2 on action.</span>
 			</div>
 		</div>
 	</form>
