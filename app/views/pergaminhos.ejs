@@ -1,0 +1,43 @@
+<div id="pergaminhos">					
+	<h3>Pergaminhos</h3>
+	
+	<h4>Ações em execução</h4>
+	<ul>
+		<% if(acoes.length == 0) {%>
+			<li>Nenhuma ação encontrada</li>
+		<% }%>
+
+		<% for(var i = 0; i < acoes.length; i++) { %>
+			<li><%= acoes[i].quantidade%> aldeão(ões) na ação <%= acoes[i].acao.nome%>
+			<% 
+				var momento_atual = new Date().getTime();
+				var tempo_restante = (acoes[i].termina_em - momento_atual) / 1000;
+			%>
+
+			<span class='tempo_restante'><%= tempo_restante %></span> <span class='seg'> segundos restantes</span>
+			<a class='revogar_ordem' href='/revogar_acao?id=<%= acoes[i]._id%>'> revogar ordem </a>
+			</li>
+		<% }%>
+		<!-- <li>1 enforcamento(s) programado - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
+		<li>2 aldeão(ões) em treinamento de magia - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
+		<li>1 aldeão(ões) em treinamento de história - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
+		<li>5 aldeão(ões) coletando recursos - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li> -->
+	</ul>
+	
+	<h4>Últimas ações ordenadas</h4>
+	<ul>
+			<% if(acoes_anteriores.length == 0) {%>
+				<li>Nenhuma ação encontrada</li>
+			<% }%>
+	
+			<% for(var i = 0; i < acoes_anteriores.length; i++) { %>
+				<li><%= acoes_anteriores[i].quantidade%> aldeão(ões) na ação <%= acoes_anteriores[i].acao.nome%>
+				</li>
+			<% }%>
+	</ul>
+
+
+
+
+
+</div>
